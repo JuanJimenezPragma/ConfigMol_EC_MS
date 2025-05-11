@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Configuration;
 public class UseCasesConfig {
 
         @Bean
-        public ConfigMolUseCase configMolUseCase(ConfigMolRepository configMolRepository) {
-                return new ConfigMolUseCase(configMolRepository);
+        public ConfigMolUseCase configMolUseCase(ConfigMolRepository configMolRepository, ParameterBankRepository parameterBankRepository) {
+                return new ConfigMolUseCase(configMolRepository, parameterBankRepository);
         }
 
         @Bean

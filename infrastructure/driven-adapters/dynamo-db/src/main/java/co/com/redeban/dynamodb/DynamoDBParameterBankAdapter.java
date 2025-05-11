@@ -6,6 +6,7 @@ import co.com.redeban.model.parameterbank.gateways.ParameterBankRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.reactivecommons.utils.ObjectMapper;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedAsyncClient;
 import software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient;
 
@@ -19,5 +20,10 @@ public class DynamoDBParameterBankAdapter extends ParameterBankAdapterOperations
     @Override
     public Flux<ParameterBank> getParameterBank(String fiid) {
         return getWithConsistencys(fiid);
+    }
+
+    @Override
+    public Mono<ParameterBank> getParameterBank(String fiid, String type) {
+        return getWithConsistency(fiid, type);
     }
 }

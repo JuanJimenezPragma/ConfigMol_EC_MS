@@ -9,4 +9,5 @@ import lombok.*;
 public class ParameterBank {
     private String fiid;
     private String type;
+    private String denialLimitSurpassed;
 }

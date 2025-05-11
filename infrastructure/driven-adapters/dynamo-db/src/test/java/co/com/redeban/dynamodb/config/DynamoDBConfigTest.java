@@ -1,9 +1,11 @@
 package co.com.redeban.dynamodb.config;
 
+import co.com.redeban.dynamodb.DynamoDBParameterBankAdapter;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.reactivecommons.utils.ObjectMapper;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedAsyncClient;
 import software.amazon.awssdk.metrics.MetricPublisher;
 import software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient;
@@ -18,6 +20,12 @@ class DynamoDBConfigTest {
 
     @Mock
     private DynamoDbAsyncClient dynamoDbAsyncClient;
+
+    @Mock
+    private DynamoDbEnhancedAsyncClient dynamoDbEnhancedAsyncClient;
+
+    @Mock
+    private ObjectMapper objectMapper;
 
     private final DynamoDBConfig dynamoDBConfig = new DynamoDBConfig();
 
@@ -47,6 +55,12 @@ class DynamoDBConfigTest {
     void testGetDynamoDbEnhancedAsyncClient() {
         DynamoDbEnhancedAsyncClient result = dynamoDBConfig.getDynamoDbEnhancedAsyncClient(dynamoDbAsyncClient);
 
+        assertNotNull(result);
+    }
+
+    @Test
+    void testGetDynamoParameterBankAdapter(){
+        DynamoDBParameterBankAdapter result = dynamoDBConfig.dynamoDBParameterBankAdapter(dynamoDbEnhancedAsyncClient, dynamoDbAsyncClient, objectMapper, "table_name");
         assertNotNull(result);
     }
 }

@@ -1,15 +1,15 @@
 package co.com.redeban.api;
-import co.com.redeban.model.configmol.ConfigMol;
-import co.com.redeban.model.parameterbank.ParameterBank;
+
+import co.com.redeban.api.dto.ConfigMolParameterRequestDTO;
+import co.com.redeban.api.dto.ConfigMolParameterResponseDTO;
 import co.com.redeban.usecase.configmol.ConfigMolUseCase;
 import co.com.redeban.usecase.parameterbank.ParameterBankUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -17,17 +17,20 @@ import reactor.core.publisher.Mono;
 @AllArgsConstructor
 public class ApiRest {
     private final ConfigMolUseCase configMolUseCase;
-
     private final ParameterBankUseCase parameterBankUseCase;
 
-    @GetMapping("{module}")
-    public Mono<ConfigMol> getConfigMol(@PathVariable("module") String module) {
-        return configMolUseCase.getConfigMol(module);
-    }
-
-    @GetMapping("/parameter/{fiid}")
-    public Flux<ParameterBank> getParameterBank(@PathVariable("fiid") String fiid) {
-        return parameterBankUseCase.getParameterBank(fiid);
+    @GetMapping
+    public Mono<ConfigMolParameterResponseDTO> getConfigParameters(@ModelAttribute ConfigMolParameterRequestDTO requestDTO) {
+        return configMolUseCase.getConfigMolParameter(requestDTO.getFiid(), requestDTO.getModule()).map(
+                tuple -> {
+                    ConfigMolParameterResponseDTO dto = new ConfigMolParameterResponseDTO();
+                    dto.setConfigMol(tuple.getT1());
+                    if (requestDTO.isMolActive()) {
+                        dto.setParameterBank(tuple.getT2());
+                    }
+                    return dto;
+                }
+        );
     }
 
 

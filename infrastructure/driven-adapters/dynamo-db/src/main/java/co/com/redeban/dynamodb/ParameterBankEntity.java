@@ -10,6 +10,7 @@ public class ParameterBankEntity {
 
     private String fiid;
     private String type;
+    private String denialLimitSurpassed;
 
     public ParameterBankEntity() {
     }
@@ -37,5 +38,14 @@ public class ParameterBankEntity {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    @DynamoDbAttribute("denialLimitSurpassed")
+    public String getDenialLimitSurpassed() {
+        return denialLimitSurpassed;
+    }
+
+    public void setDenialLimitSurpassed(String denialLimitSurpassed) {
+        this.denialLimitSurpassed = denialLimitSurpassed;
     }
 }

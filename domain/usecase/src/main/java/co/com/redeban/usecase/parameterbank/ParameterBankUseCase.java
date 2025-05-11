@@ -13,4 +13,8 @@ public class ParameterBankUseCase {
     public Flux<ParameterBank> getParameterBank(String fiid) {
         return parameterBankRepository.getParameterBank(fiid);
     }
+
+    public Mono<ParameterBank> getParameterBank(String fiid, String type) {
+        return parameterBankRepository.getParameterBank(fiid, type);
+    }
 }
