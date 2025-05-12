@@ -1,0 +1,5 @@
+dependencies {
+    implementation project(':model')
+    implementation 'org.springframework:spring-context'
+    implementation 'com.github.ben-manes.caffeine:caffeine:3.2.0'
+}

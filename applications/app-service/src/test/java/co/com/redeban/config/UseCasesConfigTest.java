@@ -1,9 +1,11 @@
 package co.com.redeban.config;
 
+import co.com.redeban.model.cache.CacheGateway;
 import co.com.redeban.model.configmol.gateways.ConfigMolRepository;
 import co.com.redeban.model.parameterbank.gateways.ParameterBankRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.cache.Cache;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,6 +46,11 @@ public class UseCasesConfigTest {
         @Bean
         public ParameterBankRepository parameterBankRepository() {
             return Mockito.mock(ParameterBankRepository.class);
+        }
+
+        @Bean
+        public CacheGateway cacheGateway() {
+            return Mockito.mock(CacheGateway.class);
         }
     }
 }
