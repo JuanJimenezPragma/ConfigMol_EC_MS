@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Import;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+
 public class UseCasesConfigTest {
 
 

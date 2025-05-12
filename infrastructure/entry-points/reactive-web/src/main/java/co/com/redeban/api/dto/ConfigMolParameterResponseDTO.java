@@ -10,4 +10,8 @@ import lombok.Setter;
 public class ConfigMolParameterResponseDTO {
     private ConfigMol configMol;
     private ParameterBank parameterBank;
+    private String codError;
+    private String error;
+    private String detailError;
+
 }

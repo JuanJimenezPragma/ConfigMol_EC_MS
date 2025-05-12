@@ -42,8 +42,8 @@ public class MicrometerMetricPublisher implements MetricPublisher {
 
     private List<Tag> buildTags(MetricCollection metricCollection) {
         return metricCollection.stream()
-                .filter(record -> record.value() instanceof String || record.value() instanceof Boolean)
-                .map(record -> Tag.of(record.metric().name(), record.value().toString()))
+                .filter(recordt -> recordt.value() instanceof String || recordt.value() instanceof Boolean)
+                .map(recordt -> Tag.of(recordt.metric().name(), recordt.value().toString()))
                 .collect(Collectors.toList());
     }
 }

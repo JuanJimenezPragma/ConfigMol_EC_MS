@@ -16,14 +16,7 @@ aws:
     endpoint: "http://localhost:8000"
     tableNameParameter: "${TABLE_NAME_PARAMETER}"
     tableNameConfigMol: "${TABLE_NAME_CONFIG_MOL}"
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "health,prometheus"
   endpoint:
     health:
       probes:
         enabled: true
-cors:
-  allowed-origins: "http://localhost:4200,http://localhost:8080"

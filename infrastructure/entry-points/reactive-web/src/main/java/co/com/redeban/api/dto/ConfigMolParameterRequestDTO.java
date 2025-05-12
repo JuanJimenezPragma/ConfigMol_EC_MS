@@ -1,6 +1,7 @@
 package co.com.redeban.api.dto;
 
-//import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,13 +9,13 @@ import lombok.Setter;
 @Setter
 public class ConfigMolParameterRequestDTO {
 
-    //@NotBlank(message = "fiid is required")
+    @NotBlank(message = "parameter 'fiid' is required")
+    @Size(min = 4, max = 4, message = "fiid must be exactly 4 characters")
     private String fiid;
 
-    //@NotBlank(message = "module is required")
+    @NotBlank(message = "parameter 'module' is required")
     private String module;
 
-    //@NotBlank(message = "molActive is required")
     private boolean molActive;
 
 }
