@@ -27,12 +27,8 @@ public class ConfigMolUseCase {
     public Mono<Tuple2<ConfigMol, ParameterBank>> getConfigMolParameter(String fiid, String modulo) {
         Mono<ConfigMol> configMolMono = Mono.defer(() -> {
             Optional<ConfigMol> cached = cacheGateway.get(modulo);
-            if (cached.isPresent()) {
-                return Mono.just(cached.get());
-            } else {
-                return configMolRepository.findByModuleName(modulo)
-                        .doOnNext(configMol -> cacheGateway.put(modulo, configMol));
-            }
+            return cached.<Mono<? extends ConfigMol>>map(Mono::just).orElseGet(() -> configMolRepository.findByModuleName(modulo)
+                    .doOnNext(configMol -> cacheGateway.put(modulo, configMol)));
         });
         Mono<ParameterBank> parameterBankMono = parameterBankRepository.getParameterBank(fiid, modulo.concat(TYPE_TRANSACTIONAL));
         return Mono.zip(configMolMono, parameterBankMono);

@@ -9,8 +9,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
+
+import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 
@@ -32,6 +35,7 @@ class ConfigMolUseCaseTest {
     void setUp() {
         configMolRepository = mock(ConfigMolRepository.class);
         parameterBankRepository = mock(ParameterBankRepository.class);
+        MockitoAnnotations.openMocks(this);
         useCase = new ConfigMolUseCase(configMolRepository, parameterBankRepository, cacheGateway);
     }
 
@@ -58,6 +62,7 @@ class ConfigMolUseCaseTest {
         ConfigMol mockConfig = ConfigMol.builder().moduleName(moduleName).build();
         ParameterBank mockParam = ParameterBank.builder().type(expectedParameterKey).build();
 
+        when(cacheGateway.get(moduleName)).thenReturn(Optional.empty());
         when(configMolRepository.findByModuleName(moduleName)).thenReturn(Mono.just(mockConfig));
         when(parameterBankRepository.getParameterBank(fiid, expectedParameterKey)).thenReturn(Mono.just(mockParam));
 
@@ -70,6 +75,7 @@ class ConfigMolUseCaseTest {
                 })
                 .verifyComplete();
 
+        verify(cacheGateway).get(moduleName);
         verify(configMolRepository).findByModuleName(moduleName);
         verify(parameterBankRepository).getParameterBank(fiid, expectedParameterKey);
     }

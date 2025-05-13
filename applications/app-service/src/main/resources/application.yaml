@@ -5,6 +5,8 @@ spring:
     name: "CT_Container_ConfigMol_EC_MS"
   devtools:
     add-properties: false
+  config:
+    import: "optional:aws-parameterstore:/config/;/config/ct_container_configmol_ec_ms/;/config/application/"
   h2:
     console:
       enabled: true
