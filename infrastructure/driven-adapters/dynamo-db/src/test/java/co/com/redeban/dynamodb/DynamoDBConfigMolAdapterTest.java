@@ -8,15 +8,13 @@ import org.reactivecommons.utils.ObjectMapper;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedAsyncClient;
-import software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-import static software.amazon.awssdk.profiles.ProfileFile.Type.CONFIGURATION;
 
 class DynamoDBConfigMolAdapterTest {
 
     private DynamoDbEnhancedAsyncClient enhancedClient;
-    private DynamoDbAsyncClient dynamoDbAsyncClient;
     private ObjectMapper mapper;
     private DynamoDBConfigMolAdapter adapter;
 
@@ -24,10 +22,9 @@ class DynamoDBConfigMolAdapterTest {
     @BeforeEach
     void setUp() {
         enhancedClient = mock(DynamoDbEnhancedAsyncClient.class);
-        dynamoDbAsyncClient = mock(DynamoDbAsyncClient.class);
         mapper = mock(ObjectMapper.class);
 
-        adapter = Mockito.spy(new DynamoDBConfigMolAdapter(enhancedClient, dynamoDbAsyncClient, mapper, "test-table"));
+        adapter = Mockito.spy(new DynamoDBConfigMolAdapter(enhancedClient, mapper, "test-table"));
     }
 
     @Test
@@ -61,9 +58,9 @@ class DynamoDBConfigMolAdapterTest {
         configMolEntity.setMol(true);
         configMolEntity.setDenial(false);
 
-        assert configMolEntity.getModuleName().equals("test-module");
-        assert configMolEntity.isMol();
-        assert !configMolEntity.isDenial();
+        assertEquals("test-module", configMolEntity.getModuleName());
+        assertTrue(configMolEntity.isMol());
+        assertFalse(configMolEntity.isDenial());
     }
 
 

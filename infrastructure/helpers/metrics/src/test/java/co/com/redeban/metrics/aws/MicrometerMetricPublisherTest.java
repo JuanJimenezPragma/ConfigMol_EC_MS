@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import software.amazon.awssdk.metrics.internal.EmptyMetricCollection;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class MicrometerMetricPublisherTest {
 
@@ -18,7 +19,7 @@ class MicrometerMetricPublisherTest {
         MicrometerMetricPublisher micrometerMetricPublisher = new MicrometerMetricPublisher(loggingMeterRegistry);
 
         micrometerMetricPublisher.publish(EmptyMetricCollection.create());
-        micrometerMetricPublisher.close();
+        assertThrows(UnsupportedOperationException.class, micrometerMetricPublisher::close);
 
         assertNotNull(micrometerMetricPublisher);
 

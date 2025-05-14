@@ -5,6 +5,7 @@ import co.com.redeban.api.enums.MolParameterErrorsEnum;
 import co.com.redeban.api.exception.MolParameterException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -44,7 +45,7 @@ class ConfigMolParameterControllerAdviceTest {
 
         StepVerifier.create(result)
                 .assertNext(response -> {
-                    assertEquals(409, response.getStatusCodeValue());
+                    assertEquals(HttpStatus.CONFLICT, response.getStatusCode());
                     ConfigMolParameterResponseDTO body = response.getBody();
                     assertNotNull(body);
                     assertEquals(MolParameterErrorsEnum.VALIDATION_ERROR.getCode(), body.getCodError());
@@ -65,7 +66,7 @@ class ConfigMolParameterControllerAdviceTest {
 
         StepVerifier.create(result)
                 .assertNext(response -> {
-                    assertEquals(404, response.getStatusCodeValue());
+                    assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
                     ConfigMolParameterResponseDTO body = response.getBody();
                     assertNotNull(body);
                     assertEquals(MolParameterErrorsEnum.DATA_NOT_FOUND.getCode(), body.getCodError());

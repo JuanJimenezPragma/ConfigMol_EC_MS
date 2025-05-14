@@ -4,7 +4,6 @@ import co.com.redeban.api.dto.ConfigMolParameterRequestDTO;
 import co.com.redeban.model.configmol.ConfigMol;
 import co.com.redeban.model.parameterbank.ParameterBank;
 import co.com.redeban.usecase.configmol.ConfigMolUseCase;
-import jakarta.validation.Validator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -20,8 +19,6 @@ class ConfigMolParameterControllerTest {
     @InjectMocks
     ConfigMolParameterController controller;
 
-    @Mock
-    private Validator validator;
 
     @Mock
     private ConfigMolUseCase useCase;

@@ -39,19 +39,6 @@ class ConfigMolUseCaseTest {
         useCase = new ConfigMolUseCase(configMolRepository, parameterBankRepository, cacheGateway);
     }
 
-    @Test
-    void shouldReturnConfigMolByModuleName() {
-        String moduleName = "P2P";
-        ConfigMol mockConfig = ConfigMol.builder().moduleName(moduleName).build();
-
-        when(configMolRepository.findByModuleName(moduleName)).thenReturn(Mono.just(mockConfig));
-
-        StepVerifier.create(useCase.getConfigMol(moduleName))
-                .expectNextMatches(config -> config.getModuleName().equals(moduleName))
-                .verifyComplete();
-
-        verify(configMolRepository).findByModuleName(moduleName);
-    }
 
     @Test
     void shouldReturnConfigMolAndParameterBank() {

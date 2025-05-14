@@ -19,11 +19,6 @@ public class ConfigMolUseCase {
     private final ParameterBankRepository parameterBankRepository;
     private final CacheGateway cacheGateway;
 
-
-    public Mono<ConfigMol> getConfigMol(String moduleName) {
-        return configMolRepository.findByModuleName(moduleName);
-    }
-
     public Mono<Tuple2<ConfigMol, ParameterBank>> getConfigMolParameter(String fiid, String modulo) {
         Mono<ConfigMol> configMolMono = Mono.defer(() -> {
             Optional<ConfigMol> cached = cacheGateway.get(modulo);

@@ -2,7 +2,6 @@ package co.com.redeban.dynamodb.helper;
 
 import org.reactivecommons.utils.ObjectMapper;
 import reactor.core.publisher.Mono;
-import software.amazon.awssdk.enhanced.dynamodb.DynamoDbAsyncIndex;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbAsyncTable;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedAsyncClient;
 import software.amazon.awssdk.enhanced.dynamodb.TableSchema;
@@ -20,8 +19,7 @@ public abstract class ConfigMolAdapterOperations<E, K, V> {
     protected ConfigMolAdapterOperations(DynamoDbEnhancedAsyncClient dynamoDbEnhancedAsyncClient,
                                          ObjectMapper mapper,
                                          Function<V, E> toEntityFn,
-                                         String tableName,
-                                         String... index) {
+                                         String tableName) {
         this.toEntityFn = toEntityFn;
         this.mapper = mapper;
         ParameterizedType genericSuperclass = (ParameterizedType) this.getClass().getGenericSuperclass();

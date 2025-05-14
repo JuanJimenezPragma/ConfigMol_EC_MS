@@ -13,7 +13,7 @@ import reactor.test.StepVerifier;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbAsyncTable;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedAsyncClient;
 
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 class ParameterBankAdapterOperationsTest {
@@ -51,7 +51,6 @@ class ParameterBankAdapterOperationsTest {
 
         adapter = spy(new DynamoDBParameterBankAdapter(
                 dynamoDbEnhancedAsyncClient,
-                mock(software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient.class),
                 mapper,
                 "table_name"
         ));
@@ -76,8 +75,8 @@ class ParameterBankAdapterOperationsTest {
     void entityGetterTest(){
         ParameterBankEntity parameterBankEntity2 = new ParameterBankEntity("1234", "P2P#Transaction");
         parameterBankEntity2.setDenialLimitSurpassed("false");
-        assert parameterBankEntity2.getFiid().equals(parameterBank.getFiid());
-        assert parameterBankEntity2.getType().equals(parameterBank.getType());
-        assert parameterBankEntity2.getDenialLimitSurpassed().equals(parameterBank.getDenialLimitSurpassed());
+        assertEquals(parameterBank.getFiid(), parameterBankEntity2.getFiid());
+        assertEquals(parameterBank.getType(), parameterBankEntity2.getType());
+        assertEquals(parameterBank.getDenialLimitSurpassed(), parameterBankEntity2.getDenialLimitSurpassed());
     }
 }

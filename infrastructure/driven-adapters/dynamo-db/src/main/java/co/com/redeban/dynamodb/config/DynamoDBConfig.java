@@ -53,7 +53,7 @@ public class DynamoDBConfig {
                                                                          DynamoDbAsyncClient dynamoDbAsyncClient,
                                                                          ObjectMapper objectMapper,
                                                                          @Value("${aws.dynamodb.tableNameParameter}") String tableName) {
-        return new DynamoDBParameterBankAdapter(enhancedClient, dynamoDbAsyncClient, objectMapper, tableName);
+        return new DynamoDBParameterBankAdapter(enhancedClient, objectMapper, tableName);
     }
 
     @Bean
@@ -61,7 +61,7 @@ public class DynamoDBConfig {
                                                              DynamoDbAsyncClient dynamoDbAsyncClient,
                                                              ObjectMapper objectMapper,
                                                              @Value("${aws.dynamodb.tableNameConfigMol}") String tableName){
-        return new DynamoDBConfigMolAdapter(enhancedClient,dynamoDbAsyncClient,objectMapper,tableName);
+        return new DynamoDBConfigMolAdapter(enhancedClient,objectMapper,tableName);
     }
 
     private AwsCredentialsProviderChain getProviderChain() {

@@ -17,7 +17,7 @@ class CacheServiceTest {
     private Cache<String, ConfigMol> mockCache;
     private CacheGateway cacheService;
 
-    private final String MODULE_NAME = "P2P";
+    private static final String MODULE_NAME = "P2P";
     private ConfigMol configMol;
 
     @BeforeEach

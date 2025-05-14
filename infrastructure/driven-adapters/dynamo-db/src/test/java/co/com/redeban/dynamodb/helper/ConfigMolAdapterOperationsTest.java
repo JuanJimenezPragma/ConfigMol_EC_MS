@@ -2,8 +2,6 @@ package co.com.redeban.dynamodb.helper;
 
 import co.com.redeban.dynamodb.ConfigMolEntity;
 import co.com.redeban.dynamodb.DynamoDBConfigMolAdapter;
-import co.com.redeban.dynamodb.DynamoDBParameterBankAdapter;
-import co.com.redeban.dynamodb.config.DynamoDBConfig;
 import co.com.redeban.model.configmol.ConfigMol;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,7 +28,6 @@ class ConfigMolAdapterOperationsTest {
 
     private DynamoDBConfigMolAdapter adapter;
 
-    private ConfigMolEntity ConfigMolEntity;
     private ConfigMol configMol;
 
     @BeforeEach
@@ -52,7 +49,6 @@ class ConfigMolAdapterOperationsTest {
 
         adapter = spy(new DynamoDBConfigMolAdapter(
                 dynamoDbEnhancedAsyncClient,
-                mock(software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient.class),
                 mapper,
                 "table_name"
         ));
