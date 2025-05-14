@@ -16,7 +16,6 @@ public abstract class ConfigMolAdapterOperations<E, K, V> {
     private final Function<V, E> toEntityFn;
     protected ObjectMapper mapper;
     private final DynamoDbAsyncTable<V> table;
-    private final DynamoDbAsyncIndex<V> tableByIndex;
 
     protected ConfigMolAdapterOperations(DynamoDbEnhancedAsyncClient dynamoDbEnhancedAsyncClient,
                                          ObjectMapper mapper,
@@ -28,7 +27,6 @@ public abstract class ConfigMolAdapterOperations<E, K, V> {
         ParameterizedType genericSuperclass = (ParameterizedType) this.getClass().getGenericSuperclass();
         this.dataClass = (Class<V>) genericSuperclass.getActualTypeArguments()[2];
         table = dynamoDbEnhancedAsyncClient.table(tableName, TableSchema.fromBean(dataClass));
-        tableByIndex = index.length > 0 ? table.index(index[0]) : null;
     }
 
 

@@ -1,9 +1,9 @@
 package co.com.redeban.api.enums;
 
 public enum MolParameterErrorsEnum {
-    VALIDATION_ERROR("409", "Validation failed"),
-    DATA_NOT_FOUND("404", "Data not found"),
-    INTERNAL_ERROR("500", "Internal server error");
+    VALIDATION_ERROR("C409-000", "Validation failed"),
+    DATA_NOT_FOUND("B404-000", "Data not found"),
+    INTERNAL_ERROR("I500-000", "Internal server error");
 
     private final String code;
     private final String message;
